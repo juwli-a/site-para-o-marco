@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pergunta e Respostas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            position: relative;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        #btnSim {
+            background-color: #4CAF50;
+            color: white;
+        }
+        #btnNao {
+            background-color: #f44336;
+            color: white;
+        }
+        .message {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+        #btnSim.moving {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>Posso dormir com você amanhã?</p>
+        <button id="btnSim" class="btn">SIM</button>
+        <button id="btnNao" class="btn">NÃO</button>
+    </div>
+
+    <script>
+        const btnSim = document.getElementById('btnSim');
+        const btnNao = document.getElementById('btnNao');
+
+        // Função para fazer o botão SIM fugir da tela e voltar
+        function moveButton() {
+            let moveCount = 0;
+            const moveSteps = 10;
+            const moveDistance = 50; // distância em pixels
+            const interval = 100; // intervalo entre os movimentos
+
+            function move() {
+                if (moveCount < moveSteps) {
+                    const x = (Math.random() - 0.5) * moveDistance * 2; // move aleatoriamente
+                    const y = (Math.random() - 0.5) * moveDistance * 2;
+                    btnSim.style.transform = `translate(${x}px, ${y}px)`;
+                    moveCount++;
+                    setTimeout(move, interval);
+                } else {
+                    btnSim.style.transform = '';
+                    moveCount = 0; // Reseta a contagem de movimentos
+                }
+            }
+
+            move();
+        }
+
+        // Quando o mouse passa sobre o botão SIM
+        btnSim.addEventListener('mouseover', moveButton);
+
+        // Quando o botão SIM é clicado
+        btnSim.addEventListener('click', () => {
+            window.location.href = 'love.html';
+        });
+
+        // Quando o botão NÃO é clicado
+        btnNao.addEventListener('click', () => {
+            window.location.href = 'error.html';
+        });
+    </script>
+</body>
+</html>
